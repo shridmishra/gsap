@@ -1,0 +1,15 @@
+import StickyCard from "@/components/StickyCard";
+
+export default function Home() {
+  return (
+    <>
+      <section className="intro">
+        <h1>The Foundation</h1>
+      </section>
+      <StickyCard/>
+      <section className="outro">
+        <h1>End in Form</h1>
+      </section>
+    </>
+  );
+}
