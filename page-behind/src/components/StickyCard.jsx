@@ -1,7 +1,12 @@
 "use client";
 
 import "./StickyCard.css";
-import React from "react";
+import React, { useRef } from "react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 const StickyCard = () => {
   const cards = [
@@ -35,8 +40,52 @@ const StickyCard = () => {
     },
   ];
 
+  const container = useRef(null);
+
+  useGSAP(
+    () => {
+      const stickyCards = gsap.utils.toArray(".sticky-card");
+
+      stickyCards.forEach((card, index) => {
+        if (index < stickyCards.length - 1) {
+          ScrollTrigger.create({
+            trigger: card,
+            start: "top top",
+            endTrigger: stickyCards[stickyCards.length - 1],
+            end: "top top",
+            pin: true,
+            pinSpacing: false,
+          });
+        }
+
+        if (index < stickyCards.length - 1) {
+          ScrollTrigger.create({
+            trigger: stickyCards[index + 1],
+            start: "top bottom",
+            end:"top top",
+            onUpdate: (self) => {
+              const progress = self.progress;
+              const scale = 1 - progress* 0.25;
+              const rotation = (index%2 == 0 ?5 : -5) * progress;
+              const afterOpacity = progress;
+              
+              gsap.set(card, {
+              scale: scale,
+              rotation: rotation,
+              "--after-opacity" : afterOpacity,
+            })
+            }
+
+           
+          });
+        }
+      });
+    },
+    { scope: container }
+  );
+
   return (
-    <div className="sticky-cards">
+    <div className="sticky-cards" ref={container}>
       {cards.map((card) => (
         <div className="sticky-card" key={card.index}>
           <div className="sticky-card-index">
@@ -50,7 +99,7 @@ const StickyCard = () => {
               </div>
               <div className="sticky-card-copy">
                 <div className="sticky-card-copy-title">
-                  <p>(About the state)</p>
+                  <p>(About the concept)</p>
                 </div>
                 <div className="sticky-card-copy-description">
                   <p>{card.description}</p>

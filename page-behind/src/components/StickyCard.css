@@ -8,10 +8,11 @@
 .sticky-card {
     position: relative;
     width: 100%;
-    height: 100svh;
+    min-height: 100svh;
     background-color: var(--foreground);
     color: var(--background);
     padding: 1.5rem;
+    padding-bottom: 5rem;
     display: flex;
     gap: 3rem;
     will-change: transform;
@@ -57,7 +58,7 @@
     aspect-ratio: 5/3;
 }
 
-.stick-card-copy {
+.sticky-card-copy {
     display: flex;
     gap: 1.5rem;
 }
