@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=PP+Neue+Montreal&display=swap');
+
+body {
+    font-family: "PP Neue Montreal", sans-serif;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: "PP Neue Montreal";
-}
+
 
 img {
   width: 100%;
@@ -49,6 +53,11 @@ section {
   transform: translateY(-50%);
   display: flex;
   gap: 0.5rem;
+}
+
+.spotlight-intro-text {
+  display: flex;
+  flex: 1; /* Equal space */
 }
 
 .spotlight-intro-text:nth-child(1) {
@@ -144,4 +153,45 @@ section {
     pointer-events: none;
     
 
+}
+
+.spotlight-img {
+  position: absolute;
+  width: 200px;
+  height: 150px;
+  will-change: transform;
+}
+
+.spotlight-header {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  transform: translateY(-50%);
+  color: #fff;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+  opacity: 0;
+}
+
+.intro,
+.outro {
+  padding: 2rem;
+  text-align: center;
+}
+
+.spotlight-titles-container {
+  clip-path: none;
+}
+
+.spotlight-titles-container::before,
+.spotlight-titles-container::after {
+  display: none;
+}
+
+.spotlight-titles {
+  left: 0;
+}
+
+.spotlight-header {
+  display: none;
 }
